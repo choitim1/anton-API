@@ -2,9 +2,11 @@
 
 const Url = "https://api.realworld.io/api";
 import { faker } from "@faker-js/faker";
-
+let token;
+let email;
+let password;
 describe("POST", () => {
-  it.only("Should register a new user ", () => {
+  it("Should register a new user ", () => {
     cy.request("Post", `${Url}/users`, {
       user: {
         username: faker.name.firstName(),
@@ -32,14 +34,13 @@ describe("POST", () => {
       cy.log(user.username);
       cy.log(user.email);
 
-      //   const token = user.token;
-      //   const email = user.email;
-      //   const password = "zyx";
-      //   return [token, email, password];
+      token = user.token;
+      email = user.email;
+      password = "zyx";
     });
   });
 
-  it("should login existing user", (email, password) => {
+  it("should login existing user", () => {
     cy.request("Post", `${Url}/users/login`, {
       user: {
         email: email,
