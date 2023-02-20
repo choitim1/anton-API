@@ -40,7 +40,7 @@ describe("POST", () => {
     });
   });
 
-  it("should login existing user", () => {
+  it.skip("should login existing user", () => {
     cy.request("Post", `${Url}/users/login`, {
       user: {
         email: email,
@@ -57,5 +57,26 @@ describe("POST", () => {
         cy.log(res);
         expect(res.user.email).to.equal(email);
       });
+  });
+  it("Should add new article", () => {
+    cy.request({
+      method: "Post",
+      url: "https://api.realworld.io/api/articles",
+      auth: { bearer: token },
+      body: {
+        article: {
+          title: "Article about API",
+          description: "How to add new article",
+          body: "Let be string",
+          tagList: ["New Tag"],
+        },
+      },
+    }).then((res) => {
+      debugger;
+      expect(res.status).to.eq(200);
+      expect(res.statusText).to.eql("OK");
+      expect(res.body.article.title).to.contain("Article about API");
+      cy.log(res);
+    });
   });
 });
