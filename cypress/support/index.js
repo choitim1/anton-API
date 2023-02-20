@@ -14,7 +14,22 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+///<reference types="cypress" />
+import meUser from "/cypress/fixtures/me-user.json";
+
+before(() => {
+  const { email, password } = meUser;
+  cy.request("POST", "https://api.realworld.io/api/users/login", {
+    user: { email, password },
+  }).then(({ status, body }) => {
+    expect(status).to.eq(200);
+    expect(body).to.have.key("user");
+    const { user } = body;
+    cy.writeFile("token.txt", user.token);
+  });
+});

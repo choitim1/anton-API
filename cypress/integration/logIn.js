@@ -56,7 +56,6 @@ describe("POST", () => {
       .then((res) => {
         cy.log(res);
         expect(res.user.email).to.equal(email);
-        // expect(res.user.username).to.equal("Tim491");
       });
   });
 });

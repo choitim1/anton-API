@@ -1,4 +1,4 @@
-let token;
+let token; //! only let
 let url = "https://bbb.testpro.io";
 let createdPlaylistID;
 let createdPlaylistName;
@@ -12,7 +12,7 @@ describe("Api request", () => {
       .its("body")
       .then((res) => {
         cy.log(res);
-        token = res.token;
+        token = res.token; //! это для обьявления переменной
         cy.log(`token = ${token}`);
         cy.log(token);
       });
