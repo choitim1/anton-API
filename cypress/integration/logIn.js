@@ -64,7 +64,7 @@ describe("POST", () => {
   it("Should add new article", () => {
     cy.request({
       method: "Post",
-      url: "https://api.realworld.io/api/articles",
+      url: `${Url}/articles`,
       auth: { bearer: token },
       body: {
         article: {
@@ -100,6 +100,7 @@ describe("POST", () => {
       //debugger;
     });
   });
+
   it("should to delete created article", () => {
     cy.request({
       method: "delete",
