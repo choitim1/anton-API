@@ -5,8 +5,9 @@ import { faker } from "@faker-js/faker";
 let token;
 let email;
 let password;
+let slug;
 describe("POST", () => {
-  it("Should register a new user ", () => {
+  it.skip("Should register a new user ", () => {
     cy.request("Post", `${Url}/users`, {
       user: {
         username: faker.name.firstName(),
@@ -40,11 +41,11 @@ describe("POST", () => {
     });
   });
 
-  it.skip("should login existing user", () => {
+  it("should login existing user", () => {
     cy.request("Post", `${Url}/users/login`, {
       user: {
-        email: email,
-        password: password,
+        email: "tim491@mail.ru",
+        password: "tim491",
       },
     })
       .then((res) => {
@@ -55,7 +56,9 @@ describe("POST", () => {
       .its("body")
       .then((res) => {
         cy.log(res);
-        expect(res.user.email).to.equal(email);
+        expect(res.user.email).to.equal("tim491@mail.ru");
+        token = res.user.token;
+        cy.log(token);
       });
   });
   it("Should add new article", () => {
@@ -71,12 +74,41 @@ describe("POST", () => {
           tagList: ["New Tag"],
         },
       },
+    })
+      .then((res) => {
+        //debugger;
+        expect(res.status).to.eq(200);
+        expect(res.statusText).to.eql("OK");
+        expect(res.body.article.title).to.contain("Article about API");
+        cy.log(res);
+      })
+      .its("body")
+      .then((body) => {
+        cy.log(body);
+        expect(body.article.title).to.equal("Article about API");
+        slug = body.article.slug;
+        cy.log(slug);
+      });
+  });
+  it("should get article", () => {
+    cy.request({
+      method: "Get",
+      url: `${Url}/articles/feed?limit=20`,
+      auth: { bearer: token },
     }).then((res) => {
-      debugger;
-      expect(res.status).to.eq(200);
-      expect(res.statusText).to.eql("OK");
-      expect(res.body.article.title).to.contain("Article about API");
       cy.log(res);
+      //debugger;
+    });
+  });
+  it("should to delete created article", () => {
+    cy.request({
+      method: "delete",
+      url: `${Url}/articles/Article-about-API-134573`,
+      auth: { bearer: token },
+    }).then((res) => {
+      cy.log(res);
+      expect(res.status).to.eq(204);
     });
   });
 });
+//! тест надо выбрать или как новый пользователь или logIn
