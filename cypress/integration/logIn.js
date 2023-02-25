@@ -100,11 +100,29 @@ describe("POST", () => {
       //debugger;
     });
   });
+  it("Update article", () => {
+    cy.request({
+      method: "Put",
+      url: `${Url}/articles/Article-about-API-134573`,
+      auth: { bearer: token },
+      body: {
+        article: {
+          title: "Article was updated",
+          description: "updated",
+          body: "new",
+          tagList: ["New Tag"],
+        },
+      },
+    }).then((res) => {
+      cy.log(res);
+      debugger;
+    });
+  });
 
   it("should to delete created article", () => {
     cy.request({
       method: "delete",
-      url: `${Url}/articles/Article-about-API-134573`,
+      url: `${Url}/articles/Article-was-updated-134573`,
       auth: { bearer: token },
     }).then((res) => {
       cy.log(res);
