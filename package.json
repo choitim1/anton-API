@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run ",
-    "koel":" cypress run --browser chrome --spec cypress/integration/koelAPI.cy.js",
-    "cypress:open": "cypress open"
+    "koel":" cypress run --browser chrome --headed --spec cypress/integration/koelAPI.cy.js",
+    "cypress:open": "cypress open",
+    "logIn":" cypress run --browser chrome --headed --spec cypress/integration/logIn.cy.js",
+    "mama": "cypress run --browser chrome --headed --spec cypress/integration/finishMama.js",
+    "alltests":"cypress run --browser chrome --headed --spec cypress/integration/*"
   },
   "keywords": [],
   "author": "",

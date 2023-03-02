@@ -1,0 +1,2 @@
+docker pull choitim/anton:api
+docker run -it -v ${pwd}:/integration -w /integration anton:api --spec cypress/integration/* ( to run in docker)
