@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run ",
-    "koel":" cypress run --browser chrome --headed --spec cypress/integration/koelAPI.cy.js",
+    "koel": " cypress run --browser chrome --headed --spec cypress/integration/koelAPI.spec.js",
     "cypress:open": "cypress open",
-    "logIn":" cypress run --browser chrome --headed --spec cypress/integration/logIn.cy.js",
-    "mama": "cypress run --browser chrome --headed --spec cypress/integration/finishMama.js",
+    "logIn": " cypress run --browser chrome --headed --spec cypress/integration/logIn.spec.js",
+    "mama": "cypress run --browser chrome --headed --spec cypress/integration/finishMama.spec.js",
     "alltests":"cypress run --browser chrome --headed --spec cypress/integration/*"
   },
   "keywords": [],
